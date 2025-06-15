@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function Home() {
 return (
   <>
-  <h2 className="text-2xl font-bold mb-4">start app</h2>
+  <h2 className="bg-primary-900 text-secondary-600">start app</h2>
   </>
 )
 }
