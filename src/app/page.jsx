@@ -1,9 +1,11 @@
 import Button from "@/ui/Button";
 import Link from "next/link";
-
+export const metadata = {
+  title: "خانه - وب اپلیکیشن مدیریت بلاگ ها",
+};
 export default function Home() {
-return (
-  <div>
+  return (
+    <div>
       <h1 className="font-bold text-center text-2xl md:text-5xl text-secondary-800 my-20">
         اپلیکیشن مدیریت بلاگ
       </h1>
@@ -24,5 +26,5 @@ return (
         </div>
       </div>
     </div>
-)
+  );
 }
