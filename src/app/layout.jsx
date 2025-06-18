@@ -7,7 +7,7 @@ export const metadata = {
     template: '%s | بلاگ اپ',
     default: 'بلاگ اپ', // a default is required when creating a template
   },
-  description: "وب اپلیکیشن مدیریت بلاگ ها",
+  description: "وب اپلیکیشن مدیریت بلاگ ها", 
 };
 
 export default function RootLayout({ children }) {
