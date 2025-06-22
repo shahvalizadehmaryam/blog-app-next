@@ -5,13 +5,9 @@ async function PostList() {
     data: { posts },
   } = await res.json();
   console.log(posts);
-  return (
-    <div>
-      {posts.map((post) => (
-        <div key={post.id}>{post.title}</div>
-      ))}
-    </div>
-  );
+  return posts.length > 0
+    ? posts.map((post) => <div key={post.id}>{post.title}</div>)
+    : null;
 }
 
 export default PostList;
