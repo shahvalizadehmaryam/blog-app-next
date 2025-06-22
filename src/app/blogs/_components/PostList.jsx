@@ -10,8 +10,13 @@ async function PostList() {
   return posts.length > 0 ? (
     <div className="grid grid-cols-12 gap-8">
       {posts.map((post) => (
-        <div key={post.id} className="col-span-12 sm:col-span-6 lg:col-span-4 border border-secondary-100 p-2 rounded-lg">
-            <Image src={post.coverImageUrl} alt="" width={400} height={400} />
+        <div
+          key={post.id}
+          className="col-span-12 sm:col-span-6 lg:col-span-4 border border-secondary-300 p-2 rounded-lg"
+        >
+          <div className="relative aspect-video rounded-md overflow-hidden mb-6"> 
+            <Image src={post.coverImageUrl} alt={post.title} fill className="object-cover object-center hover:scale-110 duration-300 ease-out" quality={80} />
+          </div>
         </div>
       ))}
     </div>
