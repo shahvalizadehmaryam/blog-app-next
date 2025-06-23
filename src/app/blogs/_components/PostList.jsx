@@ -2,6 +2,7 @@ import Link from "next/link";
 import CoverImage from "./CoverImage";
 import { ClockIcon } from "@heroicons/react/24/outline";
 import Author from "./Author";
+import PostInteraction from "./PostInteraction";
 
 async function PostList() {
   await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulating a delay
@@ -18,7 +19,7 @@ async function PostList() {
           className="col-span-12 sm:col-span-6 lg:col-span-4 border border-secondary-300 p-2 rounded-lg"
         >
           <CoverImage {...post} />
-          {/* post content */}
+          {/* post author */}
           <div>
             <Link href={`/blogs/${post.slug}`}>
               <h2 className="font-bold mb-4 text-secondary-700">
@@ -26,7 +27,7 @@ async function PostList() {
               </h2>
             </Link>
 
-            <div className="flex items-center justify-between ">
+            <div className="flex items-center justify-between mb-4">
               <Author {...post.author} />
               {/* clock part */}
               <div className="flex items-center text-[10px] text-secondary-500">
@@ -37,6 +38,7 @@ async function PostList() {
               </div>
             </div>
           </div>
+            <PostInteraction post={post} />
         </div>
       ))}
     </div>
