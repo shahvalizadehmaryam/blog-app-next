@@ -1,7 +1,7 @@
 import Link from "next/link";
 import CoverImage from "./CoverImage";
 import { ClockIcon } from "@heroicons/react/24/outline";
-import Image from "next/image";
+import Author from "./Author";
 
 async function PostList() {
   await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulating a delay
@@ -27,16 +27,7 @@ async function PostList() {
             </Link>
 
             <div className="flex items-center justify-between ">
-              <div className="flex items-center gap-x-1">
-                <Image
-                  src={post.author.avatarUrl || "/images/avatar.png"}
-                  width={24}
-                  height={24}
-                  className="rounded-full ring-1 ring-secondary-300 ml-2"
-                  alt={post.author.avatarUrl}
-                />
-                <span className="text-sm text-secondary-500">{post.author.name}</span>
-              </div>
+              <Author {...post.author} />
               {/* clock part */}
               <div className="flex items-center text-[10px] text-secondary-500">
                 <ClockIcon className="w-4 h-4 stroke-secondary-500 ml-1" />
