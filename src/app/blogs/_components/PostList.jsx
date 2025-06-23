@@ -1,4 +1,5 @@
-import Image from "next/image";
+
+import CoverImage from "./CoverImage";
 
 async function PostList() {
   await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulating a delay
@@ -14,9 +15,7 @@ async function PostList() {
           key={post.id}
           className="col-span-12 sm:col-span-6 lg:col-span-4 border border-secondary-300 p-2 rounded-lg"
         >
-          <div className="relative aspect-video rounded-md overflow-hidden mb-6"> 
-            <Image src={post.coverImageUrl} alt={post.title} fill className="object-cover object-center hover:scale-110 duration-300 ease-out" quality={80} />
-          </div>
+         <CoverImage {... post} />
         </div>
       ))}
     </div>
