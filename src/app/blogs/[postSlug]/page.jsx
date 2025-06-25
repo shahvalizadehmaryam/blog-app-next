@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { notFound } from "next/navigation";
 import React from "react";
 
 async function SinglePost({ params }) {
@@ -6,10 +7,9 @@ async function SinglePost({ params }) {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/post/slug/${params.postSlug}`
   );
-  const {
-    data: { post },
-  } = await res.json();
-  console.log("single post", post);
+  const { data } = await res.json();
+  const {post} = data || {};
+  if(!post) notFound();
   return (
     <div className="text-secondary-600 max-w-screen-md mx-auto">
       <h1 className="text-secondary-700 text-2xl font-bold mb-8">
