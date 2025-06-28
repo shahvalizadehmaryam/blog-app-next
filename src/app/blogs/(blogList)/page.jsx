@@ -2,6 +2,7 @@ import React, { Suspense } from "react";
 import PostList from "../_components/PostList";
 import Spinner from "@/ui/Spinner";
 
+export const experimental_ppr = true // Enable Partial Prerendering
 async function BlogPage() {
   return (
     <div>
