@@ -5,7 +5,7 @@ import CategoryList from "../_components/CategoryList";
 export const metadata = {
   title: "بلاگ ها",
 };
-const Layout = ({ children }) => {
+const Layout = async({ children }) => {
   return (
     <div>
       <h1 className="text-lg text-secondary-500 font-bold">لیست بلاگ ها</h1>

@@ -10,6 +10,11 @@ const nextConfig = {
       },
     ],
   },
+  logging: {
+    fetches: {
+      fullUrl: true, // Log full URL of fetch requests
+    },
+  },
 };
 
 export default nextConfig;
