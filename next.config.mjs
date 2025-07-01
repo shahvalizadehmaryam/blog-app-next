@@ -15,9 +15,9 @@ const nextConfig = {
       fullUrl: true, // Log full URL of fetch requests
     },
   },
-    experimental: {
-    ppr: 'incremental',
-  },
+  //   experimental: {
+  //   ppr: 'incremental',
+  // },
 };
 
 export default nextConfig;
