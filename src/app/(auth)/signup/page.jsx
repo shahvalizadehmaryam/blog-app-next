@@ -5,17 +5,19 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { signupApi } from "@/services/authServices";
+import toast from "react-hot-toast";
 const schema = yup
   .object({
     name: yup
       .string()
-      .min(5, "نام و نام خانوادگی حداقل باید 5 کاراکتر باشد")
-      .max(30,"نام و نام خانوادگی حداکثر باید 30 کاراکتر باشد")
+      .min(8, "نام و نام خانوادگی حداقل باید 8 کاراکتر باشد")
+      .max(30, "نام و نام خانوادگی حداکثر باید 30 کاراکتر باشد")
       .required("نام و نام خانوادگی الزامی است"),
     email: yup.string().email("ایمیل معتبر نیست").required("ایمیل الزامی است"),
     password: yup
       .string()
-      .min(6, "رمز عبور حداقل باید 6 کاراکتر باشد")
+      .min(8, "رمز عبور حداقل باید 8 کاراکتر باشد")
       .required("رمز عبور الزامی است"),
   })
   .required();
@@ -28,8 +30,15 @@ export default function Signup() {
     resolver: yupResolver(schema),
     mode: "onTouched",
   });
-  const onSubmit = (values) => {
+  const onSubmit = async (values) => {
     console.log(values);
+    try {
+      const { user, message } = await signupApi(values);
+      console.log(user, message);
+      toast.success(message);
+    } catch (error) {
+      toast.error(error.response?.data?.message);
+    }
   };
   return (
     <div>
@@ -48,7 +57,7 @@ export default function Signup() {
           label="ایمیل"
           name="email"
           register={register}
-          errors={errors}   
+          errors={errors}
           dir="ltr"
           isRequired
         />
