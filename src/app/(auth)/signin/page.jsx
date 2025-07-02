@@ -1,11 +1,10 @@
 "use client";
-import { signinApi } from "@/services/authServices";
+import { useAuth } from "@/context/AuthContext";
 import Button from "@/ui/Button";
 import RHFTextField from "@/ui/RHFTextField";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
-import toast from "react-hot-toast";
 import * as yup from "yup";
 const schema = yup
   .object({
@@ -25,13 +24,9 @@ function Signin() {
     resolver: yupResolver(schema),
     mode: "onTouched",
   });
-  const submitHandler = async (data) => {
-    try {
-      const { user, message } = await signinApi(data);
-      toast.success(message);
-    } catch (error) {
-      toast.error(error.response?.data?.message);
-    }
+  const { signin } = useAuth();
+  const submitHandler = async (values) => {
+    await signin(values);
   };
   return (
     <div>
@@ -59,7 +54,9 @@ function Signin() {
         <Button variant="primary" type="submit" className="w-full">
           ورود
         </Button>
-        <Link href="/signup" className="text-secondary-500 mt-6 text-center">ثبت نام</Link>
+        <Link href="/signup" className="text-secondary-500 mt-6 text-center">
+          ثبت نام
+        </Link>
       </form>
     </div>
   );
