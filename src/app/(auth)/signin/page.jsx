@@ -2,6 +2,7 @@
 import { useAuth } from "@/context/AuthContext";
 import Button from "@/ui/Button";
 import RHFTextField from "@/ui/RHFTextField";
+import SpinnerMini from "@/ui/SpinnerMini";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
@@ -51,9 +52,11 @@ function Signin() {
           dir="ltr"
           type="password"
         />
+
         <Button variant="primary" type="submit" className="w-full">
           ورود
         </Button>
+
         <Link href="/signup" className="text-secondary-500 mt-6 text-center">
           ثبت نام
         </Link>

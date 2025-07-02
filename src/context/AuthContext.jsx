@@ -1,7 +1,7 @@
 "use client";
-import { signinApi, signupApi } from "@/services/authServices";
+import { getUserApi, signinApi, signupApi } from "@/services/authServices";
 import { useRouter } from "next/navigation";
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useEffect, useReducer } from "react";
 import toast from "react-hot-toast";
 
 const AuthContext = createContext();
@@ -30,13 +30,16 @@ const authReducer = (state, action) => {
 
     case "signin":
       return {
-        ...state,
         user: action.payload,
         isAuthenticated: true,
       };
     case "signup":
       return {
-        ...state,
+        user: action.payload,
+        isAuthenticated: true,
+      };
+    case "user/loaded":
+      return {
         user: action.payload,
         isAuthenticated: true,
       };
@@ -44,7 +47,7 @@ const authReducer = (state, action) => {
 };
 
 export default function AuthProvider({ children }) {
-    const router = useRouter();
+  const router = useRouter();
   const [{ user, isAuthenticated, isLoading, error }, dispatch] = useReducer(
     authReducer,
     initialState
@@ -74,9 +77,30 @@ export default function AuthProvider({ children }) {
       toast.error(errorMsg);
     }
   };
+  const getUser = async () => {
+    await new Promise((resolve, reject) =>
+      setTimeout(() => resolve("ddd"), 4000)
+    );
+    dispatch({ type: "loading" });
+    try {
+      const { user } = await getUserApi();
+      dispatch({ type: "user/loaded", payload: user });
+      console.log(user);
+    } catch (error) {
+      const errorMsg = error.response?.data?.message;
+      dispatch({ type: "rejected", payload: errorMsg });
+      //   toast.error(errorMsg);
+    }
+  };
+  useEffect(() => {
+    const fetchUser = async () => {
+      await getUser();
+    };
+    fetchUser();
+  }, []);
   return (
     <AuthContext.Provider
-      value={{ user, isAuthenticated, isLoading, signup, signin }}
+      value={{ user, isAuthenticated, isLoading, signup, signin, getUser }}
     >
       {children}
     </AuthContext.Provider>
