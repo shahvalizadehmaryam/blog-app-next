@@ -30,7 +30,7 @@ app.interceptors.response.use(
           `${process.env.NEXT_PUBLIC_BASE_URL}/user/refresh-token`,
           {
             withCredentials: true,
-          }
+          } 
         );
         if (data) {
           // it means that if data exist so resend request with that configs once more.
