@@ -1,11 +1,22 @@
-export function middleware(request) {
-  const url = request.url;
-  const pathname = request.nextUrl.pathname;
+import { NextResponse } from "next/server";
+import { middlewareAuth } from "./utils/middlewareAuth";
+
+export async function middleware(request) {
+  const { pathname } = request.nextUrl;
   if (pathname.startsWith("/profile")) {
-    // set cookie refresh and access token
+    const user = await middlewareAuth(request);
+    if (!user) {
+      return NextResponse.redirect(new URL("/signin", request.nextUrl));
+    }
+  }
+  if (pathname.startsWith("/signin") || pathname.startsWith("/signup")) {
+    const user = await middlewareAuth(request);
+    if (user) {
+      return NextResponse.redirect(new URL("/", request.nextUrl));
+    }
   }
 }
 
 export const config = {
-  matcher: "/profile/:path*",
+  matcher: ["/profile/:path*", "/signin", "/signup"],
 };
