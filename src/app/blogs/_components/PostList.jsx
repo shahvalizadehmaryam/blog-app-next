@@ -6,11 +6,10 @@ import PostInteraction from "./PostInteraction";
 import { getPosts } from "@/services/postServices";
 
 async function PostList() {
-  // await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulating a delay
   const posts = await getPosts();
   return posts.length > 0 ? (
     <div className="grid grid-cols-12 gap-8">
-      {posts.map((post) => (
+      {posts?.map((post) => (
         <div
           key={post.id}
           className="col-span-12 sm:col-span-6 lg:col-span-4 border border-secondary-300 p-2 rounded-lg"
