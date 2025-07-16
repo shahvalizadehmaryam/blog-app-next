@@ -3,14 +3,23 @@ import Button from "@/ui/Button";
 import Comment from "./Comment";
 import { QuestionMarkCircleIcon } from "@heroicons/react/24/outline";
 import classNames from "classnames";
+import Modal from "@/ui/Modal";
+import { useState } from "react";
 
 function PostComments({ post: { comments, _id: postId } }) {
+  const [open, setOpen] = useState(true);
   return (
     <div className="mb-10">
       <div className="flex flex-col items-center lg:flex-row justify-between gap-y-3 mb-8">
         <h2 className="text-2xl font-bold text-secondary-800">نظرات</h2>
+        <Modal
+          open={open}
+          onClose={() => setOpen(false)}
+          title="sss"
+          description="desc test...."
+        />
         <Button
-        //   onClick={() => addNewCommentHandler(null)}
+          //   onClick={() => addNewCommentHandler(null)}
           variant="outline"
           className="flex items-center py-2"
         >
