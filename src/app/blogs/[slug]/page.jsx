@@ -2,6 +2,7 @@ import { getPostBySlug, getPosts } from "@/services/postServices";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import React from "react";
+import RelatedPost from "../_components/RelatedPosts";
 
 // if a page except these 6 blog pages doesn't exist it will show 404
 export const dynamicParams = false;
@@ -39,6 +40,7 @@ async function SinglePost({ params }) {
           src={post.coverImageUrl}
         />
       </div>
+      {post.related.length > 0 && <RelatedPost posts={post.related} />}
     </div>
   );
 }
