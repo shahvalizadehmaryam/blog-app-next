@@ -32,7 +32,7 @@ function PostComments({ post: { comments, _id: postId } }) {
           title={parent ? "پاسخ به نظر" : "نظر جدید"}
           description={parent ? parent.user.name : "نظر خود را وارد کنید."}
         >
-          <CommentForm />
+          <CommentForm postId={postId} parentId={parent ? parent._id : null} />
         </Modal>
         <Button
           onClick={() => addNewCommentHandler(null)}
@@ -51,7 +51,7 @@ function PostComments({ post: { comments, _id: postId } }) {
                 <div className="border border-secondary-200 rounded-xl p-2 sm:p-4 mb-3">
                   <Comment
                     comment={comment}
-                     onAddComment={() => addNewCommentHandler(comment)}
+                    onAddComment={() => addNewCommentHandler(comment)}
                   />
                 </div>
                 <div className="post-comments__answer mr-2 sm:mr-8 space-y-3">
