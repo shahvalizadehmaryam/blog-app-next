@@ -78,9 +78,6 @@ export default function AuthProvider({ children }) {
     }
   };
   const getUser = async () => {
-    await new Promise((resolve, reject) =>
-      setTimeout(() => resolve("ddd"), 4000)
-    );
     dispatch({ type: "loading" });
     try {
       const { user } = await getUserApi();
