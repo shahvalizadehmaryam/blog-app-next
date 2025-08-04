@@ -1,19 +1,21 @@
-import React from "react";
-import Card from "./_components/Card";
-import { fetchCardData } from "@/services/data";
+import React, { Suspense } from "react";
 import PostsTable from "./posts/_/components/PostsTable";
+import CardWrapper from "./_components/CardWrapper";
+import Fallback from "@/ui/Fallback";
+import LatestPosts from "./posts/_/components/LatestPosts";
 
 async function ProfilePage() {
-  const { numberOfUsers, numberOfComments, numberOfPosts } =
-    await fetchCardData();
   return (
     <div>
-      <div className="grid gap-6 md:grid-cols-3">
-        <Card title="کاربران" type="users" value={numberOfUsers} />
-        <Card title="کامنت ها" type="comments" value={numberOfComments} />
-        <Card title="پست ها" type="posts" value={numberOfPosts} />
-      </div>
-      <PostsTable queries="sort=latest&limit=5" />
+      <h1 className="text-xl mb-8 text-secondary-700">داشبورد</h1>
+      <Suspense fallback={<Fallback />}>
+        <CardWrapper />
+      </Suspense>
+
+      <h2 className="text-xl mb-4 mt-2 text-secondary-700">آخرین پست ها</h2>
+      <Suspense fallback={<Fallback />}>
+        <LatestPosts />
+      </Suspense>
     </div>
   );
 }
