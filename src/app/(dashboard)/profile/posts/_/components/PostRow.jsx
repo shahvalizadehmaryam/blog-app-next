@@ -2,6 +2,7 @@ import Table from "@/ui/Table";
 import { toPersianDigits } from "@/utils/numberFormatter";
 import toLocaleDateShort from "@/utils/toLocaleDateShort";
 import truncateText from "@/utils/truncateText";
+import { DeletePost, UpdatePost } from "./Buttons";
 
 //free - premium
 const typeStyle = {
@@ -28,7 +29,13 @@ const PostRow = ({ post, index }) => {
           {typeStyle[type].label}
         </span>
       </td>
-      <td>actions...</td>
+      <td>
+        <div className="flex items-center gap-x-3">
+        <UpdatePost onClick={post._id} />
+        <DeletePost
+         onClick={post._id} />
+        </div>
+      </td>
     </Table.Row>
   );
 };

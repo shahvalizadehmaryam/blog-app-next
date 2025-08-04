@@ -9,6 +9,7 @@ export async function getPostBySlug(slug) {
   return post;
 }
 export async function getPosts(queries, options) {
+
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/post/list?${queries}`,
     options

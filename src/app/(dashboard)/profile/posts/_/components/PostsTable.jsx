@@ -3,8 +3,9 @@ import Table from "@/ui/Table";
 import PostRow from "./PostRow";
 import Empty from "@/ui/Empty";
 
-export default async function PostsTable() {
-  const posts = await getPosts();
+export default async function PostsTable({ queries = "" }) {
+  const posts = await getPosts(queries);
+
   if (!posts.length) return <Empty resourcename="پستی" />;
   return (
     <div>
